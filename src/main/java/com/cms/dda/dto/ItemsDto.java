@@ -23,5 +23,5 @@ public class ItemsDto{
 	
 	private Double price;
 	
-	private int packageId;
+//	private int packageId;
 }

@@ -13,11 +13,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PackagesStatusDto{
 
-	private int id;
+//	private int id;
 	
-	private int packageId;
+//	private int packageId;
 	
 	private int statusId;
+	
+	private String statusName;
 	
 	private Date statusUpdatedOn;
 	

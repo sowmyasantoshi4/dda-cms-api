@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -32,8 +33,12 @@ public class Branches{
 	@Column(name="branch_user_id",length = 25,nullable = false)
 	private String branchUserId;
 	
-	@Column(name="incharge_staff_id",nullable = false)
-	private int inchargeStaffId;
+//	@Column(name="incharge_staff_id",nullable = false)
+//	private int inchargeStaffId;
+	@OneToOne
+	@JoinColumn(name = "incharge_staff_id",referencedColumnName = "staff_id",nullable = false)
+	private StaffMembers inchargeStaffId;
+
 
 	@Column(name="branch_name",length = 100,nullable = false)
 	private String branchName;

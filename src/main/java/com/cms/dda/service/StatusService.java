@@ -24,7 +24,9 @@ public class StatusService {
 	public List<StatusDto> findAll() {
 		log.info("In StatusService :: findAll");
 		return statusRepo.findAll().stream()
-				.map(t->new StatusDto(t.getStatusId(),t.getStatusName())).collect(Collectors.toList());
+				.map(t->new StatusDto(t.getStatusId(),t.getStatusName()))
+				.sorted((o1, o2)-> ((Integer)o1.getStatusId()).compareTo(o2.getStatusId()) )
+				.collect(Collectors.toList());
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.cms.dda.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -121,6 +124,10 @@ public class Packages{
 	
 	@OneToMany(mappedBy = "mapPackageId")
 	private List<PackagesStatus> mapPackageId;
+	
+	@CreationTimestamp
+	@Column(name="received_on",nullable = false,updatable = false)
+	private Date receivedOn;
 	
 	
 }
