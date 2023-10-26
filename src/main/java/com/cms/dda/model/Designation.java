@@ -24,7 +24,7 @@ public class Designation {
 	@Id
 	@Column(name="designation_id")
 	@GeneratedValue(generator = "designation_gen",strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(initialValue = 1,name = "designation_gen",sequenceName = "designation_seq")
+	@SequenceGenerator(initialValue = 1,name = "designation_gen",sequenceName = "designation_seq", allocationSize = 1)
 	private int designationId;
 	
 	@Column(name="designation_name",length = 50,nullable = false)

@@ -1,6 +1,7 @@
 package com.cms.dda.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.dda.dto.StatusDto;
+import com.cms.dda.model.Status;
 import com.cms.dda.repo.StatusRepo;
 
 
@@ -27,6 +29,10 @@ public class StatusService {
 				.map(t->new StatusDto(t.getStatusId(),t.getStatusName()))
 				.sorted((o1, o2)-> ((Integer)o1.getStatusId()).compareTo(o2.getStatusId()) )
 				.collect(Collectors.toList());
+	}
+	
+	public Optional<Status> findById(int statusId){
+		return statusRepo.findById(statusId);
 	}
 	
 }

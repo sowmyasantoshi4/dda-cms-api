@@ -1,5 +1,6 @@
 package com.cms.dda.repo;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,9 @@ public interface PackagesRepo extends JpaRepository<Packages,Integer> {
 	
 	@Query(value="select p from Packages p  where p.referenceNo=:refNo")
 	public List<Packages> getReport(@Param("refNo") Integer refNo);
+	
+	@Query(value="select count(p) from Packages p  where DATE(receivedOn)=DATE(:today)")
+	public int getPackagesOnDateCount(@Param("today") Date today);
+	
 	
 }

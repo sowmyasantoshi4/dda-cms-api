@@ -4,16 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class StaffMembersDto{
 
-	private int id;
+	private int staffId;
 	
-	private String name;
+	private String staffName;
 	
 	private int designationId;
 	

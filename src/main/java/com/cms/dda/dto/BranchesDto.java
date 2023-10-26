@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BranchesDto{
 	
-	private int id;
+	private int branchId;
 	
 	private String branchUserId;
 	

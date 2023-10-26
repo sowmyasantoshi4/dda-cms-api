@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,14 +19,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="packages_status")
+@Table(name="packages_status",uniqueConstraints = { 
+		@UniqueConstraint(name="package_status_id_uk",columnNames = {"package_id","status_id"})
+	}
+)
 @Getter
 @Setter
 public class PackagesStatus{
 
 	@Id
 	@GeneratedValue(generator = "packages_status_gen",strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(initialValue = 1,name = "packages_status_gen",sequenceName = "packages_status_seq")
+	@SequenceGenerator(initialValue = 1,name = "packages_status_gen",sequenceName = "packages_status_seq", allocationSize = 1)
 	@Column(name="id")
 	private int id;
 	

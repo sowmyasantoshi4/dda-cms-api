@@ -17,17 +17,19 @@ import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name="branches",uniqueConstraints = {@UniqueConstraint(columnNames = "branch_user_id",name="branch_user_id_uk")})
 @Getter
 @Setter
+@ToString
 public class Branches{
 	
 	@Id
 	@Column(name="branch_id")
 	@GeneratedValue(generator = "branches_gen",strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(initialValue = 1,name = "branches_gen",sequenceName = "branches_seq")
+	@SequenceGenerator(initialValue = 1,name = "branches_gen",sequenceName = "branches_seq", allocationSize = 1)
 	private int branchId;
 	
 	@Column(name="branch_user_id",length = 25,nullable = false)

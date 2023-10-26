@@ -1,17 +1,17 @@
 package com.cms.dda.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.cms.dda.dto.DesignationDto;
 import com.cms.dda.dto.StaffMembersDto;
+import com.cms.dda.exception.GlobalException;
 import com.cms.dda.model.Designation;
 import com.cms.dda.model.Districts;
 import com.cms.dda.model.StaffMembers;
@@ -26,6 +26,16 @@ public class StaffMembersService {
 
 	@Autowired
 	private StaffMembersRepo smRepo;
+	
+	@Autowired
+	private DesignationService desigSer;
+	
+	@Autowired
+	private DistrictsService distSer;
+	
+	@Autowired
+	private StatesService stSer;
+	
 	
 	public List<StaffMembersDto> findAll() {
 		log.info("In StaffMembersService :: findAll");
@@ -96,39 +106,37 @@ public class StaffMembersService {
 				.collect(Collectors.toList());
 	}
 	
-	public ResponseEntity save(StaffMembersDto smReq) {
+	public Optional<StaffMembers> findById(Integer staffId){
+		return smRepo.findById(staffId);
+	}
+	
+	public String save(StaffMembersDto smReq) {
 		log.info("In StaffMembersService :: save");
 		StaffMembers sm = null;
-		
-		ResponseEntity re = new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
-		
+		Designation desig = null;
+		Districts dist = null;
+		States st = null;
 		try{
 			sm = new StaffMembers();
-			sm.setStaffName(smReq.getName());
-			sm.setPhoneNo(smReq.getPhoneNo());
-			sm.setEmailId(smReq.getEmailId());
-			sm.setHouseNo(smReq.getHouseNo());
-			sm.setCity(smReq.getCity());
-			sm.setStreetNo(smReq.getStreetNo());
+			BeanUtils.copyProperties(smReq, sm);
 			
-			Districts dist = new Districts();
-			dist.setDistrictId(smReq.getDistrictId());
-			sm.setStaffDistrictId(dist);
+			desig = desigSer.findByOneDesigId(smReq.getDesignationId())
+					.orElseThrow(()->new GlobalException("Designation not found "+smReq.getDesignationId()));
 			
-			States st = new States();
-			st.setStateId(smReq.getStateId());
-			sm.setStaffStateId(st);
+			dist = distSer.findById(smReq.getDistrictId())
+					.orElseThrow(()->new GlobalException("District not found "+smReq.getDistrictId()));
 			
-			Designation desig = new Designation();
-			desig.setDesignationId(smReq.getDesignationId());
+			st = stSer.findById(smReq.getStateId())
+					.orElseThrow(()->new GlobalException("State not found "+smReq.getStateId()));
+			
 			sm.setDesignationId(desig);
-			
-			re = new ResponseEntity<>(smRepo.save(sm), HttpStatus.OK);
+			sm.setStaffDistrictId(dist);
+			sm.setStaffStateId(st);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return re;
+		return smRepo.save(sm).getStaffName();
 	}
 }

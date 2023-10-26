@@ -29,7 +29,7 @@ public class Packages{
 
 	@Id
 	@GeneratedValue(generator = "packages_gen",strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(initialValue = 1,name = "packages_gen",sequenceName = "packages_seq")
+	@SequenceGenerator(initialValue = 1,name = "packages_gen",sequenceName = "packages_seq", allocationSize = 1)
 	@Column(name="package_id")
 	private int packageId;
 	

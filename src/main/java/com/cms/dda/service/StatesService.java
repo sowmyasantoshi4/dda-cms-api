@@ -1,6 +1,7 @@
 package com.cms.dda.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.dda.dto.StatesDto;
+import com.cms.dda.model.States;
 import com.cms.dda.repo.StatesRepo;
 
 
@@ -25,6 +27,10 @@ public class StatesService {
 		log.info("In StatesService :: findAll");
 		return statesRepo.findAll().stream()
 				.map(t->new StatesDto(t.getStateId(),t.getStateName())).collect(Collectors.toList());
+	}
+	
+	public Optional<States> findById(int stateId){
+		return statesRepo.findById(stateId);
 	}
 	
 }

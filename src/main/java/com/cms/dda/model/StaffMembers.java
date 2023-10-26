@@ -24,7 +24,7 @@ public class StaffMembers{
 
 	@Id
 	@GeneratedValue(generator = "staff_members_gen",strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(initialValue = 1,name = "staff_members_gen",sequenceName = "staff_members_seq")
+	@SequenceGenerator(initialValue = 1,name = "staff_members_gen",sequenceName = "staff_members_seq", allocationSize = 1)
 	@Column(name="staff_id")
 	private int staffId;
 	
@@ -54,11 +54,11 @@ public class StaffMembers{
 	private String pincode;
 	
 	@ManyToOne
-	@JoinColumn(name="district_id",referencedColumnName = "district_id",nullable = true)
+	@JoinColumn(name="district_id",referencedColumnName = "district_id")
 	private Districts staffDistrictId;
 	
 	@ManyToOne
-	@JoinColumn(name="state_id",referencedColumnName = "state_id",nullable = true)
+	@JoinColumn(name="state_id",referencedColumnName = "state_id")
 	private States staffStateId;
 	
 	@ManyToOne

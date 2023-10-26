@@ -16,5 +16,7 @@ public interface BranchesRepo extends JpaRepository<Branches,Integer> {
 	
 	@Query(value="select b from Branches b where b.branchStateId.stateId=:stateId and b.branchDistrictId.districtId=:districtId")
 	public List<Branches> findByStateDistrictId(@Param("stateId") int stateId, @Param("districtId") int districtId);
+
+	public long count();
 	
 }

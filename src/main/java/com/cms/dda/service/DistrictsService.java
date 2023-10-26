@@ -1,6 +1,7 @@
 package com.cms.dda.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.dda.dto.DistrictsDto;
+import com.cms.dda.model.Districts;
 import com.cms.dda.repo.DistrictsRepo;
 
 
@@ -31,5 +33,10 @@ public class DistrictsService {
 		log.info("In DistrictsServiceImpl :: findAllDistrictByStateId");
 		return districtsRepo.findByStateId(stateId).stream()
 				.map(t->new DistrictsDto(t.getDistrictId(),t.getDistrictName(),stateId)).collect(Collectors.toList());
+	}
+	
+	public Optional<Districts> findById(Integer districtId) {
+		log.info("In DistrictsServiceImpl :: findAllDistrictByStateId");
+		return districtsRepo.findById(districtId);
 	}
 }

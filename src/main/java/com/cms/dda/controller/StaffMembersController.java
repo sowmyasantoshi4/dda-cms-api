@@ -3,17 +3,18 @@ package com.cms.dda.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cms.dda.dto.StaffMembersDto;
 import com.cms.dda.service.StaffMembersService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/staffMembers")
@@ -55,11 +56,12 @@ public class StaffMembersController {
 	}
 	
 	/*
-	 * Get Alls Staff Members of particular branch Id and designation Id
+	 * Save Staff Members -> branch Id can be null which is added at the time of branch
 	 */
 	@PostMapping("/add")
-	public ResponseEntity<StaffMembersDto> addStaffMember(@RequestBody StaffMembersDto sm ) {
-		return smSer.save(sm);
+	public ResponseEntity<?> addStaffMember(@RequestBody StaffMembersDto sm ) {
+		String staffName = smSer.save(sm);
+		return new ResponseEntity<>(staffName,HttpStatus.CREATED);
 	}
 	
 	

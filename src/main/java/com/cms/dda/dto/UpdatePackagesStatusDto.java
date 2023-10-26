@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PackagesStatusDto{
+public class UpdatePackagesStatusDto{
 
 //	private int id;
 	
@@ -24,5 +24,7 @@ public class PackagesStatusDto{
 	private Date statusUpdatedOn;
 	
 	private String remarks;
+	
+	private int dispatchStaffId;
 	
 }

@@ -1,6 +1,7 @@
 package com.cms.dda.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.cms.dda.dto.DesignationDto;
 import com.cms.dda.dto.StatusDto;
+import com.cms.dda.model.Designation;
 import com.cms.dda.repo.DesignationRepo;
 import com.cms.dda.repo.StatusRepo;
 
@@ -27,6 +29,10 @@ public class DesignationService {
 		log.info("In StatusService :: findAll");
 		return desigRepo.findAll().stream()
 				.map(t->new DesignationDto(t.getDesignationId(),t.getDesignationName())).collect(Collectors.toList());
+	}
+	
+	public Optional<Designation> findByOneDesigId(int desigId){
+		return desigRepo.findById(desigId);
 	}
 	
 }
