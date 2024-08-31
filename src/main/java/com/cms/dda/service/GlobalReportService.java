@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.cms.dda.dto.PackagesDto;
 import com.cms.dda.model.GlobalReport;
-import com.cms.dda.model.Packages;
 
 
 //@Service
@@ -26,7 +25,7 @@ public class GlobalReportService {
 		rep.setStatusId(gr.getStatusId());
 		rep.setReferenceNo(gr.getReferenceNo());
 		
-		Packages p = new Packages();
+		//Packages p = new Packages();
 		//p.setSendingBranchId(gr.getFromBranchId());
 		
 		//Example<GlobalReport> example = Example.of(rep);   

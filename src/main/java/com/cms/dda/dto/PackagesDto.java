@@ -68,7 +68,7 @@ public class PackagesDto{
 	
 	private String  currentStatusName;
 	
-	private String  remarks;
+//	private String  remarks;
 	
 	private int dispatchByStaffId;
 	

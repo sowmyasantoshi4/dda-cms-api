@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cms.dda.dto.PackagesDto;
-import com.cms.dda.dto.PackagesStatusDto;
 import com.cms.dda.dto.UpdatePackagesStatusDto;
 import com.cms.dda.model.GlobalReport;
 import com.cms.dda.service.PackagesService;

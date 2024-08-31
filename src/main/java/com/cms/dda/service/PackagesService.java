@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cms.dda.dto.ItemsDto;
 import com.cms.dda.dto.PackagesDto;
 import com.cms.dda.dto.PackagesStatusDto;
-import com.cms.dda.dto.StatesDto;
-import com.cms.dda.dto.StatusDto;
 import com.cms.dda.dto.UpdatePackagesStatusDto;
 import com.cms.dda.exception.GlobalException;
 import com.cms.dda.model.Branches;
@@ -77,7 +75,7 @@ public class PackagesService {
 				.map(t->new PackagesDto(t.getPackageId(), t.getReferenceNo()
 						, t.getSenderName(), t.getSenderPhoneNo(), t.getSenderEmailId(), t.getSenderHouseNo(), t.getSenderStreetNo(), t.getSenderCity(), t.getSenderDistrictId().getDistrictId(), t.getSenderDistrictId().getDistrictName(), t.getSenderStateId().getStateId(), t.getSenderStateId().getStateName(), t.getSenderPincode()
 						, t.getReceiverName(), t.getReceiverPhoneNo(), t.getReceiverEmailId(), t.getReceiverHouseNo(), t.getReceiverStreetNo(), t.getReceiverCity(), t.getReceiverDistrictId().getDistrictId(), t.getReceiverDistrictId().getDistrictName(), t.getReceiverStateId().getStateId(), t.getReceiverStateId().getStateName(), t.getReceiverPincode()
-						, t.getPackagesStatusId().getStatusId(), t.getPackagesStatusId().getStatusName(), t.getRemarks()
+						, t.getPackagesStatusId().getStatusId(), t.getPackagesStatusId().getStatusName()
 						, ( null == t.getDispatchByStaffId() ? 0 : t.getDispatchByStaffId().getStaffId() )
 						, ( null == t.getDispatchByStaffId() ? null : t.getDispatchByStaffId().getStaffName() )
 						, t.getSendingBranchId().getBranchId(), t.getSendingBranchId().getBranchName()
@@ -102,7 +100,7 @@ public class PackagesService {
 		PackagesDto pkDto = new PackagesDto(t.getPackageId(), t.getReferenceNo()
 				, t.getSenderName(), t.getSenderPhoneNo(), t.getSenderEmailId(), t.getSenderHouseNo(), t.getSenderStreetNo(), t.getSenderCity(), t.getSenderDistrictId().getDistrictId(), t.getSenderDistrictId().getDistrictName(), t.getSenderStateId().getStateId(), t.getSenderStateId().getStateName(), t.getSenderPincode()
 				, t.getReceiverName(), t.getReceiverPhoneNo(), t.getReceiverEmailId(), t.getReceiverHouseNo(), t.getReceiverStreetNo(), t.getReceiverCity(), t.getReceiverDistrictId().getDistrictId(), t.getReceiverDistrictId().getDistrictName(), t.getReceiverStateId().getStateId(), t.getReceiverStateId().getStateName(), t.getReceiverPincode()
-				, t.getPackagesStatusId().getStatusId(), t.getPackagesStatusId().getStatusName(), t.getRemarks()
+				, t.getPackagesStatusId().getStatusId(), t.getPackagesStatusId().getStatusName()
 				, ( null == t.getDispatchByStaffId() ? 0 : t.getDispatchByStaffId().getStaffId() )
 				, ( null == t.getDispatchByStaffId() ? null : t.getDispatchByStaffId().getStaffName() )
 				, t.getSendingBranchId().getBranchId(), t.getSendingBranchId().getBranchName()
@@ -163,7 +161,7 @@ public class PackagesService {
 			
 			SimpleDateFormat dnt = new SimpleDateFormat("yyyyMMdd");
 	        Date today = new Date();
-	        System.out.println("Today Date & Time at Now :"+dnt.format(today)); 
+//	        System.out.println("Today Date & Time at Now :"+dnt.format(today)); 
 	        
 			int count = (pkRepo.getPackagesOnDateCount(today))+1;
 			String temp = dnt.format(today)+StringUtils.leftPad(count+"", 2, '0');
@@ -195,6 +193,7 @@ public class PackagesService {
 					PackagesStatus p = new PackagesStatus();
 					p.setMapPackageId(pk);
 					p.setMapStatusId(status);
+					p.setRemarks(pd.getRemarks());
 					ls.add(p);
 				}
 				pk.setMapPackageId(ls);
@@ -260,8 +259,8 @@ public class PackagesService {
 		int statusId = 0;
 		int fromBranchId = 0;
 		int toBranchId = 0;
-		String fromDt = null;
-		String toDt = null;
+		//String fromDt = null;
+		//String toDt = null;
 		Status st = null;
 		Branches br = null;
 		List<PackagesDto> reportData = null;
@@ -270,8 +269,8 @@ public class PackagesService {
 			statusId = grReq.getStatusId();
 			fromBranchId = grReq.getFromBranchId();
 			toBranchId = grReq.getToBranchId();
-			fromDt = grReq.getFromDate();
-			toDt = grReq.getToDate();
+			//fromDt = grReq.getFromDate();
+			//toDt = grReq.getToDate();
 			
 			pk = new Packages();
 			if( refNo>0 ) {
@@ -298,7 +297,7 @@ public class PackagesService {
 						.map(t->new PackagesDto(t.getPackageId(), t.getReferenceNo()
 								, t.getSenderName(), t.getSenderPhoneNo(), t.getSenderEmailId(), t.getSenderHouseNo(), t.getSenderStreetNo(), t.getSenderCity(), t.getSenderDistrictId().getDistrictId(), t.getSenderDistrictId().getDistrictName(), t.getSenderStateId().getStateId(), t.getSenderStateId().getStateName(), t.getSenderPincode()
 								, t.getReceiverName(), t.getReceiverPhoneNo(), t.getReceiverEmailId(), t.getReceiverHouseNo(), t.getReceiverStreetNo(), t.getReceiverCity(), t.getReceiverDistrictId().getDistrictId(), t.getReceiverDistrictId().getDistrictName(), t.getReceiverStateId().getStateId(), t.getReceiverStateId().getStateName(), t.getReceiverPincode()
-								, t.getPackagesStatusId().getStatusId(), t.getPackagesStatusId().getStatusName(), t.getRemarks()
+								, t.getPackagesStatusId().getStatusId(), t.getPackagesStatusId().getStatusName()
 								, ( null == t.getDispatchByStaffId() ? 0 : t.getDispatchByStaffId().getStaffId() )
 								, ( null == t.getDispatchByStaffId() ? null : t.getDispatchByStaffId().getStaffName() )
 								, t.getSendingBranchId().getBranchId(), t.getSendingBranchId().getBranchName()

@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cms.dda.dto.DesignationDto;
-import com.cms.dda.dto.StatusDto;
 import com.cms.dda.model.Designation;
 import com.cms.dda.repo.DesignationRepo;
-import com.cms.dda.repo.StatusRepo;
 
 
 @Service

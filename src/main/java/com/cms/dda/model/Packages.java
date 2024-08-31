@@ -16,8 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,9 +36,6 @@ public class Packages{
 	
 	@Column(name="sender_name",length = 50,nullable = false)
 	private String  senderName;
-	
-//	@Column(name="sender_address",length = 250,nullable = false)
-//	private String senderAddress;
 	
 	@Column(name="sender_phone_no",length = 25,nullable = false)
 	private String  senderPhoneNo;
@@ -71,9 +66,6 @@ public class Packages{
 	@Column(name="receiver_name",length = 50,nullable = false)
 	private String receiverName;
 	
-//	@Column(name="receiver_address",length = 250,nullable = false)
-//	private String receiverAddress;
-	
 	@Column(name="receiver_phone_no",length = 25,nullable = false)
 	private String receiverPhoneNo;
 	
@@ -103,9 +95,6 @@ public class Packages{
 	@ManyToOne
 	@JoinColumn(name="status_id",referencedColumnName = "status_id",nullable = false)
 	private Status packagesStatusId;
-	
-	@Column(name="remarks",length = 500)
-	private String  remarks;
 	
 	@ManyToOne
 	@JoinColumn(name="dispatch_by_staff_id",referencedColumnName = "staff_id")
