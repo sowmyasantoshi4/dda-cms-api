@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+#      POSTGRES_DB: cmsdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./cmsdb_init_script.sql:/docker-entrypoint-initdb.d/cmsdb_init_script.sql  # Mount the SQL script
+#      - ./data.sql:/docker-entrypoint-initdb.d/data.sql  # Mount another SQL script
+    networks:
+      - app-network
+      
+  app:
+    build: .
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cmsdb
+      SPRING_DATASOURCE_USERNAME: cmsdb
+      SPRING_DATASOURCE_PASSWORD: cmsdb
+      SPRING_PROFILES_ACTIVE: dev    # Specify the profile here
+    depends_on:
+      - db
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+      
+volumes:
+  postgres-data:
+  
+networks:
+  app-network:
+  
