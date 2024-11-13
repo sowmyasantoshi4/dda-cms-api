@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            // Allow Swagger UI and related endpoints without authentication
 	            .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**", "/webjars/**").permitAll()
 	            // Allow login without authentication
-	            .antMatchers("/authenticate").permitAll()
+	            .antMatchers("/authenticate","/tracking").permitAll()
 	            // Allow pre-flight requests (CORS)
 	            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 	            // All other requests require authentication
